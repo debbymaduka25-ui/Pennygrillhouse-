@@ -1,270 +1,493 @@
- <!DOCTYPE html>
+ 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Penny Grill House NG | Roasted Guinea Fowl Kaduna</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root { --red:#C8201B; --black:#161312; --yellow:#F6C21A; --cream:#FFF9EC; --green:#1B7F3B; --muted:#5A4F4A; }
-  * { box-sizing: border-box; }
-  body { margin:0; font-family:Inter,system-ui,sans-serif; color:var(--black); background:var(--cream); }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--black); background:var(--cream); }
   a { color:inherit; text-decoration:none; }
   button { font-family:inherit; cursor:pointer; }
-  h1,h2,h3,.brand { font-family:Oswald,sans-serif; }
+  h1, h2, h3 { font-family:Impact, "Arial Narrow", Arial, sans-serif; letter-spacing:0.5px; font-weight:normal; }
   .wrap { max-width:1200px; margin:0 auto; }
 
-  /* Header */
   header { background:var(--black); color:#fff; padding:14px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
-  .brand { font-size:26px; font-weight:700; letter-spacing:1px; }
-  .brand .y { color:var(--yellow); } .brand .r { color:#E8423C; }
-  nav { display:flex; flex-wrap:wrap; gap:16px; align-items:center; font-size:15px; }
-  nav a.link { padding:12px 4px; border-bottom:3px solid transparent; }
-  nav a.link.active { font-weight:700; border-color:var(--yellow); }
+  .brand { font-family:Impact, Arial, sans-serif; font-size:26px; letter-spacing:1px; cursor:pointer; }
+  .brand .y { color:var(--yellow); }
+  .brand .r { color:#E8423C; }
+  nav { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  nav button.link { background:none; border:0; color:#fff; font-size:15px; padding:12px 10px; border-bottom:3px solid transparent; }
+  nav button.link.active { font-weight:bold; border-bottom-color:var(--yellow); }
 
-  /* Buttons */
-  .btn { display:inline-block; font-weight:700; padding:14px 24px; border-radius:999px; }
+  .btn { display:inline-block; font-weight:bold; padding:14px 24px; border-radius:999px; border:0; font-size:16px; text-align:center; }
   .btn-yellow { background:var(--yellow); color:var(--black); }
-  .btn-outline { border:2px solid #fff; padding:12px 22px; }
+  .btn-outline { border:2px solid #fff; padding:12px 22px; color:#fff; background:none; }
   .btn-green { background:var(--green); color:#fff; }
+  .btn-red { background:var(--red); color:#fff; }
 
-  /* Pages: only the active one shows */
-  .page { display:none; } .page.active { display:block; }
+  .page { display:none; }
+  .page.active { display:block; }
   .band { background:var(--red); color:#fff; padding:48px 24px; }
-  .band h1 { font-size:52px; margin:0 0 8px; }
+  .band h1 { font-size:48px; margin:0 0 8px; }
   .band p { margin:0; font-size:18px; }
-  section.pad { padding:48px 24px; min-height:420px; }
+  .pad { padding:48px 24px; min-height:420px; }
 
-  /* Home */
   .hero { background:var(--red); color:#fff; padding:56px 24px; }
   .hero .wrap { display:flex; flex-wrap:wrap; gap:40px; align-items:center; }
   .hero .text { flex:1 1 380px; min-width:0; }
-  .eyebrow { font-size:14px; font-weight:700; letter-spacing:2px; color:var(--yellow); }
-  .hero h1 { font-size:64px; line-height:1.05; margin:12px 0 16px; }
+  .eyebrow { font-size:14px; font-weight:bold; letter-spacing:2px; color:var(--yellow); }
+  .hero h1 { font-size:60px; line-height:1.05; margin:12px 0 16px; }
   .hero p { font-size:18px; line-height:1.5; max-width:520px; margin:0 0 28px; }
-  .hero .actions { display:flex; flex-wrap:wrap; gap:12px; }
-  .photo { flex:1 1 360px; min-width:0; height:340px; border-radius:20px; background:var(--black); border:3px dashed var(--yellow);
-           display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; color:var(--yellow); }
+  .actions { display:flex; flex-wrap:wrap; gap:12px; }
+  .flame { flex:1 1 360px; min-width:0; min-height:320px; border-radius:20px; background:var(--black); border:3px solid var(--yellow); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; color:var(--yellow); }
+  .flame .big { font-size:90px; line-height:1; }
+  .flame .t { font-family:Impact, Arial, sans-serif; font-size:30px; margin-top:12px; }
+  .flame .s { color:#fff; margin-top:6px; }
   .points { background:var(--yellow); padding:20px 24px; }
-  .points .wrap { display:flex; flex-wrap:wrap; gap:16px 40px; justify-content:space-around; font-weight:700; text-align:center; }
+  .points .wrap { display:flex; flex-wrap:wrap; gap:16px 40px; justify-content:space-around; font-weight:bold; text-align:center; }
 
-  /* Cards */
   .cards { display:flex; flex-wrap:wrap; gap:20px; }
   .card { flex:1 1 280px; min-width:0; background:#fff; border:2px solid var(--black); border-radius:20px; padding:24px; }
-  .card h3 { font-size:26px; margin:0 0 10px; color:var(--red); }
+  .card h3 { font-size:24px; margin:0 0 10px; color:var(--red); }
   .card p { margin:0; line-height:1.6; }
-  .placeholder { border:3px dashed var(--red); border-radius:16px; height:240px; margin-top:20px; display:flex; align-items:center; justify-content:center; color:var(--red); }
+  .clickable { cursor:pointer; }
+  .mapbox { margin-top:20px; background:#fff; border:2px solid var(--black); border-radius:20px; padding:28px; text-align:center; }
+  .mapbox p { margin:0 0 16px; font-size:18px; }
+  .story { font-size:18px; line-height:1.7; max-width:760px; margin:0 0 28px; }
 
-  /* Menu + cart */
   .menu-layout { display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; }
-  #menu-list { flex:999 1 560px; min-width:0; display:flex; flex-direction:column; gap:32px; }
+  .menu-list { flex:999 1 560px; min-width:0; }
+  .cat { margin-bottom:32px; }
   .cat h3 { font-size:26px; margin:0 0 12px; padding-bottom:8px; border-bottom:3px solid var(--red); color:var(--red); }
   .item { display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; padding:12px 0; border-bottom:1px solid #E9DDC2; }
   .item .info { flex:1 1 220px; min-width:0; }
-  .item .name { font-weight:700; } .item .desc { font-size:14px; color:var(--muted); }
-  .item .price { font-weight:700; white-space:nowrap; }
-  .add { min-width:88px; min-height:44px; background:var(--black); color:#fff; border:0; border-radius:999px; font-weight:700; }
-  .qty { display:flex; align-items:center; gap:6px; min-width:88px; justify-content:center; font-weight:700; }
-  .qty button { width:44px; height:44px; border-radius:50%; font-size:20px; font-weight:700; border:2px solid var(--black); background:#fff; }
+  .item .name { font-weight:bold; }
+  .item .desc { font-size:14px; color:var(--muted); margin-top:2px; }
+  .item .price { font-weight:bold; white-space:nowrap; }
+  .add { min-width:88px; min-height:44px; background:var(--black); color:#fff; border:0; border-radius:999px; font-weight:bold; font-size:15px; }
+  .qty { display:none; align-items:center; gap:6px; min-width:88px; justify-content:center; font-weight:bold; }
+  .item.incart .qty { display:flex; }
+  .item.incart .add { display:none; }
+  .qty button { width:44px; height:44px; border-radius:50%; font-size:20px; font-weight:bold; border:2px solid var(--black); background:#fff; }
   .qty button.plus { background:var(--black); color:#fff; border:0; }
-  aside.cart { flex:1 1 300px; min-width:0; background:#fff; border:2px solid var(--black); border-radius:20px; padding:24px; }
-  aside.cart h3 { font-size:26px; margin:0 0 12px; }
+
+  .cart { flex:1 1 300px; min-width:0; background:#fff; border:2px solid var(--black); border-radius:20px; padding:24px; }
+  .cart h3 { font-size:24px; margin:0 0 12px; }
   .line { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid #E9DDC2; font-size:15px; }
-  .total { display:flex; justify-content:space-between; font-weight:700; font-size:18px; padding:14px 0; }
+  .total { display:flex; justify-content:space-between; font-weight:bold; font-size:18px; padding:14px 0; }
   .note { font-size:13px; color:var(--muted); margin:0 0 14px; }
-  #send { display:block; text-align:center; }
+  #cart-full { display:none; }
+  #send { display:block; }
+  #float { display:none; position:fixed; right:16px; bottom:16px; z-index:10; background:var(--green); color:#fff; border:0; border-radius:999px; padding:14px 22px; font-weight:bold; font-size:16px; box-shadow:0 4px 14px rgba(0,0,0,0.3); }
 
   footer { background:var(--red); color:#fff; padding:40px 24px; }
   footer .wrap { display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center; }
-  footer .links { display:flex; flex-wrap:wrap; gap:20px; font-weight:700; }
+  footer .fb { font-family:Impact, Arial, sans-serif; font-size:24px; }
+  footer .links { display:flex; flex-wrap:wrap; gap:20px; font-weight:bold; }
+
+  @media (max-width:600px) {
+    .hero h1 { font-size:44px; }
+    .band h1 { font-size:36px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <a href="#home" class="brand"><span class="y">PENNY</span> GRILL HOUSE <span class="r">NG</span></a>
+  <div class="brand" onclick="show('home')"><span class="y">PENNY</span> GRILL HOUSE <span class="r">NG</span></div>
   <nav>
-    <a class="link" href="#home">Home</a>
-    <a class="link" href="#menu">Menu</a>
-    <a class="link" href="#delivery">Delivery &amp; Pickup</a>
-    <a class="link" href="#about">About</a>
-    <a class="link" href="#contact">Contact</a>
-    <a class="btn btn-yellow wa-link" href="#">Order on WhatsApp</a>
+    <button class="link active" id="nav-home" onclick="show('home')">Home</button>
+    <button class="link" id="nav-menu" onclick="show('menu')">Menu</button>
+    <button class="link" id="nav-delivery" onclick="show('delivery')">Delivery &amp; Pickup</button>
+    <button class="link" id="nav-about" onclick="show('about')">About</button>
+    <button class="link" id="nav-contact" onclick="show('contact')">Contact</button>
+    <a class="btn btn-yellow" target="_blank" href="https://wa.me/2349070119821?text=Hello%20Penny%20Grill%20House%2C%20I%20would%20like%20to%20place%20an%20order.">Order on WhatsApp</a>
   </nav>
 </header>
 
-<!-- HOME -->
-<main id="home" class="page">
+<!-- ===================== HOME ===================== -->
+<div class="page active" id="pg-home">
   <div class="hero"><div class="wrap">
     <div class="text">
       <div class="eyebrow">ROASTED GUINEA FOWL KADUNA</div>
       <h1>One Taste Is Never Enough.</h1>
       <p>Premium guinea fowl, freshly grilled over open flame. Delivered across Kaduna and Abuja, or pick up in Kawo.</p>
       <div class="actions">
-        <a class="btn btn-yellow" href="#menu">See the menu</a>
+        <button class="btn btn-yellow" onclick="show('menu')">See the menu</button>
         <a class="btn btn-outline" href="tel:+2349070119821">Call 0907 011 9821</a>
       </div>
     </div>
-    <div class="photo">[HERO PHOTO: whole grilled guinea fowl. Client to supply.]</div>
+    <div class="flame">
+      <div class="big">🔥</div>
+      <div class="t">FRESHLY GRILLED</div>
+      <div class="s">Premium guinea fowl, roasted to order</div>
+    </div>
   </div></div>
-  <div class="points"><div class="wrap">
-    <div>Premium Guinea Fowl</div><div>Low Cholesterol, Rich Protein</div><div>Freshly Grilled, Quality You Can Trust</div>
-  </div></div>
-  <section class="pad"><div class="wrap cards">
-    <a class="card" href="#menu"><h3>Menu</h3><p>Roasted guinea fowl, snails, rabbit, catfish and signature platters.</p></a>
-    <a class="card" href="#delivery"><h3>Delivery &amp; Pickup</h3><p>Pick up in Kawo or get it delivered. Open daily, 8 AM to 6 PM.</p></a>
-    <a class="card" href="#contact"><h3>Contact</h3><p>Call, WhatsApp or email us to place your order.</p></a>
-  </div></section>
-</main>
 
-<!-- MENU -->
-<main id="menu" class="page">
+  <div class="points"><div class="wrap">
+    <div>Premium Guinea Fowl</div>
+    <div>Low Cholesterol, Rich Protein</div>
+    <div>Quality You Can Trust</div>
+  </div></div>
+
+  <div class="pad"><div class="wrap cards">
+    <div class="card clickable" onclick="show('menu')"><h3>Menu</h3><p>Roasted guinea fowl, snails, rabbit, catfish and signature platters.</p></div>
+    <div class="card clickable" onclick="show('delivery')"><h3>Delivery &amp; Pickup</h3><p>Pick up in Kawo or get it delivered. Open daily, 8 AM to 6 PM.</p></div>
+    <div class="card clickable" onclick="show('contact')"><h3>Contact</h3><p>Call, WhatsApp or email us to place your order.</p></div>
+  </div></div>
+</div>
+
+<!-- ===================== MENU ===================== -->
+<div class="page" id="pg-menu">
   <div class="band"><div class="wrap"><h1>Our Menu</h1><p>Tap Add to build your order, then send it straight to WhatsApp.</p></div></div>
-  <section class="pad"><div class="wrap menu-layout">
-    <div id="menu-list"></div>
-    <aside class="cart">
+  <div class="pad"><div class="wrap menu-layout">
+
+    <div class="menu-list">
+
+      <div class="cat">
+        <h3>Roasted &amp; Grilled Specials</h3>
+
+        <div class="item" data-name="Guinea Fowl, Regular (1kg)" data-price="15500">
+          <div class="info"><div class="name">Guinea Fowl, Regular (1kg)</div></div>
+          <div class="price">₦15,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Guinea Fowl, Large (1.2kg)" data-price="16500">
+          <div class="info"><div class="name">Guinea Fowl, Large (1.2kg)</div></div>
+          <div class="price">₦16,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Guinea Fowl, Extra Large (1.6kg)" data-price="17500">
+          <div class="info"><div class="name">Guinea Fowl, Extra Large (1.6kg)</div></div>
+          <div class="price">₦17,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Guinea Fowl, Premium (2kg)" data-price="18500">
+          <div class="info"><div class="name">Guinea Fowl, Premium (2kg)</div></div>
+          <div class="price">₦18,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Roasted Local Chicken" data-price="14500">
+          <div class="info"><div class="name">Roasted Local Chicken</div></div>
+          <div class="price">₦14,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Peppered Snails (4 jumbo snails)" data-price="16000">
+          <div class="info"><div class="name">Peppered Snails</div><div class="desc">4 jumbo snails</div></div>
+          <div class="price">₦16,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Roasted Rabbit" data-price="18000">
+          <div class="info"><div class="name">Roasted Rabbit</div></div>
+          <div class="price">₦18,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Peppered Rabbit" data-price="20000">
+          <div class="info"><div class="name">Peppered Rabbit</div></div>
+          <div class="price">₦20,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Smoky Dried Beef" data-price="15000">
+          <div class="info"><div class="name">Smoky Dried Beef</div></div>
+          <div class="price">₦15,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Smoky Dried Goat Meat" data-price="15000">
+          <div class="info"><div class="name">Smoky Dried Goat Meat</div></div>
+          <div class="price">₦15,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Roasted Turkey Wing" data-price="8000">
+          <div class="info"><div class="name">Roasted Turkey Wing</div></div>
+          <div class="price">₦8,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Grilled Catfish, Medium" data-price="8000">
+          <div class="info"><div class="name">Grilled Catfish, Medium</div></div>
+          <div class="price">₦8,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Grilled Catfish, Large" data-price="10000">
+          <div class="info"><div class="name">Grilled Catfish, Large</div></div>
+          <div class="price">₦10,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Kilishi Special" data-price="10000">
+          <div class="info"><div class="name">Kilishi Special</div></div>
+          <div class="price">₦10,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+      </div>
+
+      <div class="cat">
+        <h3>Combo Platters</h3>
+
+        <div class="item" data-name="Royal Platter" data-price="32000">
+          <div class="info"><div class="name">Royal Platter</div><div class="desc">1 diced peppered roasted guinea fowl, 5 samosas, 5 spring rolls, plantain and Irish potato fries</div></div>
+          <div class="price">₦32,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Gindadi Platter" data-price="27000">
+          <div class="info"><div class="name">Gindadi Platter</div><div class="desc">4 big peppered snails, 5 samosas, 5 spring rolls, plantain and Irish potato fries</div></div>
+          <div class="price">₦27,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Heaven’s Delight Platter" data-price="17500">
+          <div class="info"><div class="name">Heaven’s Delight Platter</div><div class="desc">1 medium catfish, puff-puff, yam cubes, shrimps</div></div>
+          <div class="price">₦17,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Casper Special" data-price="17500">
+          <div class="info"><div class="name">Casper Special</div><div class="desc">1 turkey wing, puff-puff, yam cubes, shrimps</div></div>
+          <div class="price">₦17,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+      </div>
+
+      <div class="cat">
+        <h3>Sides, Extras &amp; Drinks</h3>
+
+        <div class="item" data-name="Peppered Sauce (with any protein)" data-price="2000">
+          <div class="info"><div class="name">Peppered Sauce</div><div class="desc">With any protein</div></div>
+          <div class="price">₦2,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Irish Potato and Egg Salad" data-price="8000">
+          <div class="info"><div class="name">Irish Potato &amp; Egg Salad</div></div>
+          <div class="price">₦8,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Gizzard Stick" data-price="1200">
+          <div class="info"><div class="name">Gizzard Sticks</div><div class="desc">Price is per stick</div></div>
+          <div class="price">₦1,200</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Irish Potatoes and Plantain Chips" data-price="6000">
+          <div class="info"><div class="name">Irish Potatoes &amp; Plantain Chips</div></div>
+          <div class="price">₦6,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Yam Cubes" data-price="2500">
+          <div class="info"><div class="name">Yam Cubes</div></div>
+          <div class="price">₦2,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Shrimps" data-price="3000">
+          <div class="info"><div class="name">Shrimps</div></div>
+          <div class="price">₦3,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Puff-puff" data-price="2000">
+          <div class="info"><div class="name">Puff-puff</div></div>
+          <div class="price">₦2,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Unsweetened Fruity Zobo" data-price="1500">
+          <div class="info"><div class="name">Unsweetened Fruity Zobo</div></div>
+          <div class="price">₦1,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Detox Cleanse Drink" data-price="1500">
+          <div class="info"><div class="name">Detox Cleanse Drink</div></div>
+          <div class="price">₦1,500</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+
+        <div class="item" data-name="Cashew Fresh Mix" data-price="2000">
+          <div class="info"><div class="name">Cashew Fresh Mix</div></div>
+          <div class="price">₦2,000</div>
+          <button class="add" onclick="change(this,1)">Add</button>
+          <div class="qty"><button onclick="change(this,-1)">-</button><span class="n">0</span><button class="plus" onclick="change(this,1)">+</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart" id="cart">
       <h3>Your Order</h3>
       <p id="cart-empty">Your cart is empty. Add something tasty.</p>
-      <div id="cart-full" hidden>
+      <div id="cart-full">
         <div id="cart-lines"></div>
-        <div class="total"><span>Total</span><span id="cart-total"></span></div>
+        <div class="total"><span>Total</span><span id="cart-total">₦0</span></div>
         <p class="note">Delivery fee is confirmed on WhatsApp.</p>
-        <a id="send" class="btn btn-green" href="#">Send order on WhatsApp</a>
+        <a id="send" class="btn btn-green" target="_blank" href="https://wa.me/2349070119821">Send order on WhatsApp</a>
       </div>
-    </aside>
-  </div></section>
-</main>
-
-<!-- DELIVERY & PICKUP -->
-<main id="delivery" class="page">
-  <div class="band"><div class="wrap"><h1>Delivery &amp; Pickup</h1><p>Fresh from the grill, to your door or your hands.</p></div></div>
-  <section class="pad"><div class="wrap">
-    <div class="cards">
-      <div class="card"><h3>Pickup</h3><p>Opposite Air Force Base, Kawo, Kaduna.<br>Open daily, 8 AM to 6 PM.</p></div>
-      <div class="card"><h3>Delivery</h3><p>Kaduna and Abuja, plus other states on request. [Client to confirm areas and fees.]</p></div>
     </div>
-    <div class="placeholder">[GOOGLE MAP: Kawo location]</div>
-    <a class="btn btn-green wa-link" href="#" style="margin-top:24px">Order on WhatsApp</a>
-  </div></section>
-</main>
 
-<!-- ABOUT -->
-<main id="about" class="page">
-  <div class="band"><div class="wrap"><h1>About Us</h1><p>Home of Roasted Guinea Fowl Kaduna.</p></div></div>
-  <section class="pad"><div class="wrap">
-    <p style="font-size:18px;line-height:1.6;max-width:720px;margin:0 0 28px">[Client to share the brand story: how Penny Grill House started and what makes the guinea fowl special.]</p>
+  </div></div>
+</div>
+
+<!-- ===================== DELIVERY & PICKUP ===================== -->
+<div class="page" id="pg-delivery">
+  <div class="band"><div class="wrap"><h1>Delivery &amp; Pickup</h1><p>Fresh from the grill, to your door or your hands.</p></div></div>
+  <div class="pad"><div class="wrap">
     <div class="cards">
-      <div class="card"><h3>Premium Guinea Fowl</h3><p>Carefully selected and freshly grilled.</p></div>
+      <div class="card"><h3>Pickup</h3><p>Directly opposite Air Force Base, Kawo, Kaduna.<br>Open daily, 8 AM to 6 PM.</p></div>
+      <div class="card"><h3>Delivery</h3><p>We deliver within Kaduna and to Abuja, and we can arrange delivery to other states. Message us on WhatsApp for your delivery fee.</p></div>
+    </div>
+    <div class="mapbox">
+      <p>Find us at Kawo, opposite the Air Force Base, Kaduna.</p>
+      <a class="btn btn-red" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Air+Force+Base+Kawo+Kaduna">Open in Google Maps</a>
+    </div>
+    <p style="margin-top:24px"><a class="btn btn-green" target="_blank" href="https://wa.me/2349070119821?text=Hello%20Penny%20Grill%20House%2C%20I%20would%20like%20to%20place%20an%20order.">Order on WhatsApp</a></p>
+  </div></div>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<div class="page" id="pg-about">
+  <div class="band"><div class="wrap"><h1>About Us</h1><p>Home of Roasted Guinea Fowl Kaduna.</p></div></div>
+  <div class="pad"><div class="wrap">
+    <p class="story">Penny Grill House NG is a Kaduna eatery built around one thing: premium guinea fowl, freshly roasted over open flame. Alongside our signature guinea fowl, we grill peppered snails, rabbit, catfish, turkey wings and more, and serve them with sides, platters and fresh drinks. Walk in and pick up, or have it delivered to you.</p>
+    <div class="cards">
+      <div class="card"><h3>Premium Guinea Fowl</h3><p>Carefully selected and freshly grilled to order.</p></div>
       <div class="card"><h3>Low Cholesterol</h3><p>Rich protein you can feel good about.</p></div>
       <div class="card"><h3>Quality You Can Trust</h3><p>One taste is never enough.</p></div>
     </div>
-  </div></section>
-</main>
+  </div></div>
+</div>
 
-<!-- CONTACT -->
-<main id="contact" class="page">
+<!-- ===================== CONTACT ===================== -->
+<div class="page" id="pg-contact">
   <div class="band"><div class="wrap"><h1>Contact</h1><p>Ready to order? Reach us any of these ways.</p></div></div>
-  <section class="pad"><div class="wrap">
+  <div class="pad"><div class="wrap">
     <div class="cards">
-      <div class="card"><h3>Call</h3><a href="tel:+2349070119821"><b>0907 011 9821</b></a></div>
-      <div class="card"><h3>WhatsApp</h3><a class="wa-link" href="#"><b>Chat with us</b></a></div>
-      <div class="card"><h3>Email</h3><a href="mailto:Pennygrillhouseng@gmail.com" style="overflow-wrap:anywhere"><b>Pennygrillhouseng@gmail.com</b></a></div>
+      <div class="card"><h3>Call</h3><p><a href="tel:+2349070119821"><b>0907 011 9821</b></a></p></div>
+      <div class="card"><h3>WhatsApp</h3><p><a target="_blank" href="https://wa.me/2349070119821?text=Hello%20Penny%20Grill%20House%2C%20I%20would%20like%20to%20place%20an%20order."><b>Chat with us</b></a></p></div>
+      <div class="card"><h3>Email</h3><p style="overflow-wrap:anywhere"><a href="mailto:Pennygrillhouseng@gmail.com"><b>Pennygrillhouseng@gmail.com</b></a></p></div>
     </div>
-    <p style="margin-top:24px;line-height:1.6">Opposite Air Force Base, Kawo, Kaduna. Open daily, 8 AM to 6 PM.<br>Instagram, Facebook and TikTok links: [client to confirm handles].</p>
-  </div></section>
-</main>
+    <p style="margin-top:24px;line-height:1.7">Directly opposite Air Force Base, Kawo, Kaduna.<br>Open daily, 8 AM to 6 PM.<br>Instagram: <a target="_blank" href="https://instagram.com/Kaduna_RoastedGuineafowl"><b>@Kaduna_RoastedGuineafowl</b></a><br>Facebook: <b>Roasted guinea fowl kd</b><br>TikTok: <b>PENNY GRILL HOUSE NG</b></p>
+  </div></div>
+</div>
 
 <footer><div class="wrap">
   <div>
-    <div class="brand" style="font-size:24px;font-weight:700">PENNY GRILL HOUSE NG</div>
+    <div class="fb">PENNY GRILL HOUSE NG</div>
     <div style="margin-top:6px">0907 011 9821 | Pennygrillhouseng@gmail.com</div>
   </div>
-  <div class="links"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">TikTok</a></div>
+  <div class="links">
+    <a target="_blank" href="https://instagram.com/Kaduna_RoastedGuineafowl">Instagram</a>
+    <a href="#" onclick="show('contact');return false;">Contact</a>
+  </div>
 </div></footer>
 
+<button id="float" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">View order</button>
+
 <script>
-  const WHATSAPP = '2349070119821';
-  const naira = n => '₦' + n.toLocaleString('en-US');
-  const waUrl = text => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  var WHATSAPP = '2349070119821';
+  var currentPage = 'home';
 
-  // ---- Menu data: [id, name, description, price] ----
-  const MENU = [
-    ['Roasted & Grilled Specials', [
-      ['gf1','Guinea Fowl, Regular (1kg)','',15500], ['gf2','Guinea Fowl, Large (1.2kg)','',16500],
-      ['gf3','Guinea Fowl, Extra Large (1.6kg)','',17500], ['gf4','Guinea Fowl, Premium (2kg)','',18500],
-      ['lc','Roasted Local Chicken','',14500], ['ps','Peppered Snails','4 jumbo snails',16000],
-      ['rr','Roasted Rabbit','',18000], ['pr','Peppered Rabbit','',20000],
-      ['sb','Smoky Dried Beef','',15000], ['sg','Smoky Dried Goat Meat','',15000],
-      ['tw','Roasted Turkey Wing','',8000], ['cm','Grilled Catfish, Medium','',8000],
-      ['cl','Grilled Catfish, Large','',10000], ['ks','Kilishi Special','',10000]]],
-    ['Combo Platters', [
-      ['rp','Royal Platter','Diced peppered guinea fowl, 5 samosas, 5 spring rolls, plantain & Irish potato fries',32000],
-      ['gp','Gindadi Platter','4 big peppered snails, 5 samosas, 5 spring rolls, plantain & Irish potato fries',27000],
-      ['hd','Heaven’s Delight Platter','Medium catfish, puff-puff, yam cubes, shrimps',17500],
-      ['cs','Casper Special','Turkey wing, puff-puff, yam cubes, shrimps',17500]]],
-    ['Sides, Extras & Drinks', [
-      ['pp','Peppered Sauce','With any protein',2000], ['es','Irish Potato & Egg Salad','',8000],
-      ['gz','Gizzard Sticks','Each',1200], ['ip','Irish Potatoes & Plantain Chips','',6000],
-      ['yc','Yam Cubes','',2500], ['sh','Shrimps','',3000], ['pf','Puff-puff','',2000],
-      ['zb','Unsweetened Fruity Zobo','',1500], ['dd','Detox Cleanse Drink','',1500], ['cf','Cashew Fresh Mix','',2000]]]
-  ];
-  const ITEMS = Object.fromEntries(MENU.flatMap(([, items]) => items.map(i => [i[0], i])));
-  const cart = {};   // { itemId: quantity }
-
-  // ---- Menu rendering ----
-  function renderMenu() {
-    document.getElementById('menu-list').innerHTML = MENU.map(([cat, items]) => `
-      <div class="cat"><h3>${cat}</h3>
-        ${items.map(([id, name, desc, price]) => `
-          <div class="item">
-            <div class="info"><div class="name">${name}</div><div class="desc">${desc}</div></div>
-            <div class="price">${naira(price)}</div>
-            ${cart[id]
-              ? `<div class="qty"><button onclick="change('${id}',-1)" aria-label="Remove one">-</button>
-                   <span>${cart[id]}</span>
-                   <button class="plus" onclick="change('${id}',1)" aria-label="Add one">+</button></div>`
-              : `<button class="add" onclick="change('${id}',1)">Add</button>`}
-          </div>`).join('')}
-      </div>`).join('');
+  function fmt(n) {
+    return '₦' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  // ---- Cart ----
-  function change(id, delta) {
-    cart[id] = (cart[id] || 0) + delta;
-    if (cart[id] <= 0) delete cart[id];
-    renderMenu(); renderCart();
-  }
-
-  function renderCart() {
-    const lines = Object.entries(cart).map(([id, qty]) => {
-      const [, name, , price] = ITEMS[id];
-      return { qty, name, sub: qty * price };
-    });
-    const total = lines.reduce((sum, l) => sum + l.sub, 0);
-    document.getElementById('cart-empty').hidden = lines.length > 0;
-    document.getElementById('cart-full').hidden = lines.length === 0;
-    document.getElementById('cart-lines').innerHTML = lines.map(l =>
-      `<div class="line"><span>${l.qty} x ${l.name}</span><span>${naira(l.sub)}</span></div>`).join('');
-    document.getElementById('cart-total').textContent = naira(total);
-    const message = 'Hello Penny Grill House, I would like to order:\n' +
-      lines.map(l => `- ${l.qty}x ${l.name} (${naira(l.sub)})`).join('\n') +
-      `\nTotal: ${naira(total)}\nDelivery or pickup: `;
-    document.getElementById('send').href = waUrl(message);
-  }
-
-  // ---- Simple page router (uses the # in the address) ----
-  function route() {
-    const page = (location.hash || '#home').slice(1);
-    const target = document.getElementById(page) ? page : 'home';
-    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === target));
-    document.querySelectorAll('nav a.link').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + target));
+  function show(name) {
+    var pages = ['home', 'menu', 'delivery', 'about', 'contact'];
+    for (var i = 0; i < pages.length; i++) {
+      document.getElementById('pg-' + pages[i]).className = 'page' + (pages[i] === name ? ' active' : '');
+      document.getElementById('nav-' + pages[i]).className = 'link' + (pages[i] === name ? ' active' : '');
+    }
+    currentPage = name;
     window.scrollTo(0, 0);
+    updateCart();
   }
 
-  // ---- Start ----
-  document.querySelectorAll('.wa-link').forEach(a => a.href = waUrl('Hello Penny Grill House, I would like to place an order.'));
-  window.addEventListener('hashchange', route);
-  renderMenu(); renderCart(); route();
+  function change(button, delta) {
+    var item = button.closest('.item');
+    var q = parseInt(item.getAttribute('data-q') || '0', 10) + delta;
+    if (q < 0) { q = 0; }
+    item.setAttribute('data-q', q);
+    item.querySelector('.n').textContent = q;
+    if (q > 0) { item.classList.add('incart'); } else { item.classList.remove('incart'); }
+    updateCart();
+  }
+
+  function updateCart() {
+    var items = document.querySelectorAll('.item');
+    var html = '';
+    var message = 'Hello Penny Grill House, I would like to order:\n';
+    var total = 0;
+    var count = 0;
+
+    for (var i = 0; i < items.length; i++) {
+      var q = parseInt(items[i].getAttribute('data-q') || '0', 10);
+      if (q > 0) {
+        var name = items[i].getAttribute('data-name');
+        var price = parseInt(items[i].getAttribute('data-price'), 10);
+        var sub = q * price;
+        total += sub;
+        count += q;
+        html += '<div class="line"><span>' + q + ' x ' + name + '</span><span>' + fmt(sub) + '</span></div>';
+        message += '- ' + q + 'x ' + name + ' (' + fmt(sub) + ')\n';
+      }
+    }
+
+    message += 'Total: ' + fmt(total) + '\nDelivery or pickup: ';
+
+    document.getElementById('cart-lines').innerHTML = html;
+    document.getElementById('cart-total').textContent = fmt(total);
+    document.getElementById('cart-empty').style.display = count > 0 ? 'none' : 'block';
+    document.getElementById('cart-full').style.display = count > 0 ? 'block' : 'none';
+    document.getElementById('send').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message);
+
+    var floatBtn = document.getElementById('float');
+    floatBtn.style.display = (count > 0 && currentPage === 'menu') ? 'block' : 'none';
+    floatBtn.textContent = 'View order (' + fmt(total) + ')';
+  }
+
+  updateCart();
 </script>
 </body>
 </html>
